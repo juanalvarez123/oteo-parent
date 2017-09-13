@@ -1,0 +1,1 @@
+web: java -jar oteo-rest-api/target/oteo-rest-api-0.0.1-SNAPSHOT.jar
