@@ -12,7 +12,7 @@ public class HealthCheckController {
 	@RequestMapping(path = "/healthcheck", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ApiGenericResponse getHealthCheck() {
 
-		return new ApiGenericResponse("First message");
+		return new ApiGenericResponse("Welcome Juan Sebastian !!");
 	}
 
 }
