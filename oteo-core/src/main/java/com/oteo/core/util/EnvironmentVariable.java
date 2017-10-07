@@ -2,9 +2,9 @@ package com.oteo.core.util;
 
 public enum EnvironmentVariable {
 
-	DATABASE_URL,
-	DATABASE_USER,
-	DATABASE_PASSWORD;
+	SPRING_DATASOURCE_URL,
+	SPRING_DATASOURCE_USERNAME,
+	SPRING_DATASOURCE_PASSWORD;
 
 	private EnvironmentVariable() {
 	}

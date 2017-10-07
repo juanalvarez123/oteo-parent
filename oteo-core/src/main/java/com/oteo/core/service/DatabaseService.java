@@ -14,9 +14,9 @@ public class DatabaseService {
 	public boolean isDatabaseActive() throws SQLException {
 
 		Connection connection = DriverManager.getConnection(
-				System.getenv(EnvironmentVariable.DATABASE_URL.name()),
-				System.getenv(EnvironmentVariable.DATABASE_USER.name()),
-				System.getenv(EnvironmentVariable.DATABASE_PASSWORD.name()));
+				System.getenv(EnvironmentVariable.SPRING_DATASOURCE_URL.name()),
+				System.getenv(EnvironmentVariable.SPRING_DATASOURCE_USERNAME.name()),
+				System.getenv(EnvironmentVariable.SPRING_DATASOURCE_PASSWORD.name()));
 
 		return connection != null;
 	}
