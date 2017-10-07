@@ -18,6 +18,13 @@
 
 	<dependencies>
 
+		<!-- oteo-core -->
+		<dependency>
+			<groupId>oteo-core</groupId>
+			<artifactId>oteo-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
