@@ -1,6 +1,6 @@
 FROM java:8
 VOLUME /tmp
-ADD oteo-rest-api-0.0.1-SNAPSHOT.jar app.jar
+ADD oteo-rest-api-0.0.1.jar app.jar
 RUN sh -c 'touch /app.jar'
 ENV JAVA_OPTS=""
 
