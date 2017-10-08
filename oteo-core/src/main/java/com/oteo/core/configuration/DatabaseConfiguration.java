@@ -7,9 +7,11 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.annotation.Order;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
+@Order(1)
 @EnableAutoConfiguration
 @PropertySource({ "classpath:datasource.properties" })
 public class DatabaseConfiguration {

@@ -1,4 +1,4 @@
-package com.oteo.controller;
+package com.oteo.model.response;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -13,10 +13,8 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonPropertyOrder({ "httpStatus", "message", "databaseStatus" })
+@JsonPropertyOrder({ "message", "databaseStatus" })
 public class ApiGenericResponse {
-
-	private int httpStatus;
 
 	private String message;
 
