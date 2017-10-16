@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.DefenderCaseTrackingMapper">
+
+	<sql id="defenderCaseTrackingColumns">
+		${alias}.defender_case_tracking_id AS ${alias}_defender_case_tracking_id,
+		${alias}.defender_id AS ${alias}_defender_id,
+		${alias}.name AS ${alias}_name,
+		${alias}.progress AS ${alias}_progress,
+		${alias}.datetime AS ${alias}_datetime,
+		${alias}.observation AS ${alias}_observation,
+		${alias}.link AS ${alias}_link
+	</sql>
+
+	<resultMap id="defenderCaseTrackingResultMap" type="com.oteo.core.mybatis.domain.DefenderCaseTracking">
+		<id property="defenderCaseTrackingId" column="defender_case_tracking_defender_case_tracking_id" />
+		<result property="defenderId" column="defender_case_tracking_defender_id"/>
+		<result property="name" column="defender_case_tracking_name"/>
+		<result property="progress" column="defender_case_tracking_progress"/>
+		<result property="datetime" column="defender_case_tracking_datetime"/>
+		<result property="observation" column="defender_case_tracking_observation"/>
+		<result property="link" column="defender_case_tracking_link"/>
+	</resultMap>
+
+	<select id="getCaseTrackingByDefenderId" resultMap="defenderCaseTrackingResultMap">
+		SELECT
+			<include refid="defenderCaseTrackingColumns"><property name="alias" value="defender_case_tracking"/></include>
+		FROM
+			defender_case_tracking defender_case_tracking
+		WHERE
+			defender_case_tracking.defender_id = #{defenderId}
+	</select>
+
+	<insert id="addOrUpdateDefenderCaseTracking">
+		INSERT INTO defender_case_tracking (defender_case_tracking_id, defender_id, name, progress, datetime, observation, link)
+		VALUES (#{defender_case_tracking_id}, #{defender_id}, #{name}, #{progress}, #{datetime}, #{observation}, #{link})
+		ON CONFLICT (defender_case_tracking_id) DO UPDATE
+		SET
+		defender_id = #{defender_id},
+		name = #{name},
+		progress = #{progress},
+		datetime = #{datetime},
+		observation = #{observation},
+		link = #{link};
+	</insert>
+
+</mapper>

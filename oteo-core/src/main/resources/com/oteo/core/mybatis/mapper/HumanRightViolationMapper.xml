@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.HumanRightViolationMapper">
+
+	<sql id="humanRightViolationColumns">
+		${alias}.human_right_violation_id AS ${alias}_human_right_violation_id,
+		${alias}.defender_id AS ${alias}_defender_id,
+		${alias}.attack AS ${alias}_attack,
+		${alias}.responsible AS ${alias}_responsible,
+		${alias}.datetime AS ${alias}_datetime,
+		${alias}.observation AS ${alias}_observation,
+		${alias}.link AS ${alias}_link
+	</sql>
+
+	<resultMap id="humanRightViolationResultMap" type="com.oteo.core.mybatis.domain.HumanRightViolation">
+		<id property="humanRightViolationId" column="human_right_violation_human_right_violation_id" />
+		<result property="defenderId" column="human_right_violation_defender_id"/>
+		<result property="attack" column="human_right_violation_attack"/>
+		<result property="responsible" column="human_right_violation_responsible"/>
+		<result property="datetime" column="human_right_violation_"/>
+		<result property="observation" column="human_right_violation_"/>
+		<result property="link" column="human_right_violation_"/>
+	</resultMap>
+
+	<select id="getHumanRightViolationsByDefenderId" resultMap="humanRightViolationResultMap">
+		SELECT
+			<include refid="humanRightViolationColumns"><property name="alias" value="human_right_violation"/></include>
+		FROM
+			human_right_violation human_right_violation
+		WHERE
+			human_right_violation.defender_id = #{defenderId}
+	</select>
+
+	<insert id="addOrUpdateHumanRightViolation">
+		INSERT INTO human_right_violation (human_right_violation_id, defender_id, attack, responsible, datetime, observation, link)
+		VALUES (#{human_right_violation_id}, #{defender_id}, #{attack}, #{responsible}, #{datetime}, #{observation}, #{link})
+		ON CONFLICT (human_right_violation_id) DO UPDATE
+		SET
+		defender_id = #{defender_id},
+		attack = #{attack},
+		responsible = #{responsible},
+		datetime = #{datetime},
+		observation = #{observation},
+		link = #{link};
+	</insert>
+
+</mapper>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.EnvironmentalConflictMapper">
+
+	<sql id="environmentalConflictColumns">
+		${alias}.environmental_conflict_id AS ${alias}_environmental_conflict_id,
+		${alias}.country AS ${alias}_country,
+		${alias}.place AS ${alias}_place,
+		${alias}.name AS ${alias}_name,
+		${alias}.latitude AS ${alias}_latitude,
+		${alias}.longitude AS ${alias}_longitude,
+		${alias}.datetime AS ${alias}_datetime,
+		${alias}.conflict AS ${alias}_conflict,
+		${alias}.extractivism AS ${alias}_extractivism,
+		${alias}.resources AS ${alias}_resources,
+		${alias}.source AS ${alias}_source,
+		${alias}.link AS ${alias}_link
+	</sql>
+
+	<resultMap id="environmentalConflictResultMap" type="com.oteo.core.mybatis.domain.EnvironmentalConflict">
+		<id property="environmentalConflictId" column="environmental_conflict_environmental_conflict_id" />
+		<result property="country" column="environmental_conflict_country"/>
+		<result property="place" column="environmental_conflict_place"/>
+		<result property="name" column="environmental_conflict_name"/>
+		<result property="latitude" column="environmental_conflict_latitude"/>
+		<result property="longitude" column="environmental_conflict_longitude"/>
+		<result property="datetime" column="environmental_conflict_datetime"/>
+		<result property="conflict" column="environmental_conflict_conflict"/>
+		<result property="extractivism" column="environmental_conflict_extractivism"/>
+		<result property="resources" column="environmental_conflict_resources"/>
+		<result property="source" column="environmental_conflict_source"/>
+		<result property="link" column="environmental_conflict_link"/>
+	</resultMap>
+
+	<select id="getEnvironmentalConflictsByCountry" resultMap="environmentalConflictResultMap">
+		SELECT
+			<include refid="environmentalConflictColumns"><property name="alias" value="environmental_conflict"/></include>
+		FROM
+			environmental_conflict environmental_conflict
+		WHERE
+			environmental_conflict.country = #{country}
+	</select>
+
+	<insert id="addOrUpdateEnvironmentalConflict">
+		INSERT INTO environmental_conflict (environmental_conflict_id, country, place, name, latitude, longitude, datetime, conflict, extractivism, resources, source, link)
+		VALUES (#{environmental_conflict_id}, #{country}, #{place}, #{name}, #{latitude}, #{longitude}, #{datetime}, #{conflict}, #{extractivism}, #{resources}, #{source}, #{link})
+		ON CONFLICT (environmental_conflict_id) DO UPDATE
+		SET
+		country = #{country},
+		place = #{place},
+		name = #{name},
+		latitude = #{latitude},
+		longitude = #{longitude},
+		datetime = #{datetime},
+		conflict = #{conflict},
+		extractivism = #{extractivism},
+		resources = #{resources},
+		source = #{source},
+		link = #{link};
+	</insert>
+
+</mapper>

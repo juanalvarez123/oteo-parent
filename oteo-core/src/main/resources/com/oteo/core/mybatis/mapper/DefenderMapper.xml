@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.DefenderMapper">
+
+	<sql id="defenderColumns">
+		${alias}.defender_id AS ${alias}_defender_id,
+		${alias}.name AS ${alias}_name,
+		${alias}.age AS ${alias}_age,
+		${alias}.sex AS ${alias}_sex,
+		${alias}.gender AS ${alias}_gender,
+		${alias}.population_group AS ${alias}_population_group,
+		${alias}.profession AS ${alias}_profession,
+		${alias}.position AS ${alias}_position,
+		${alias}.awards AS ${alias}_awards,
+		${alias}.alive AS ${alias}_alive,
+		${alias}.death_datetime AS ${alias}_death_datetime,
+		${alias}.observation AS ${alias}_observation
+	</sql>
+
+	<resultMap id="defenderResultMap" type="com.oteo.core.mybatis.domain.Defender">
+		<id property="defenderId" column="defender_defender_id" />
+		<result property="name" column="defender_name"/>
+		<result property="age" column="defender_age"/>
+		<result property="sex" column="defender_sex"/>
+		<result property="gender" column="defender_gender"/>
+		<result property="populationGroup" column="defender_population_group"/>
+		<result property="profession" column="defender_profession"/>
+		<result property="position" column="defender_position"/>
+		<result property="awards" column="defender_awards"/>
+		<result property="alive" column="defender_alive"/>
+		<result property="deathDatetime" column="defender_death_datetime"/>
+		<result property="observation" column="defender_observation"/>
+	</resultMap>
+
+	<select id="getDefenderById" resultMap="defenderResultMap">
+		SELECT
+			<include refid="defenderColumns"><property name="alias" value="defender"/></include>
+		FROM
+			defender defender
+		WHERE
+			defender.defender_id = #{defenderId}
+	</select>
+
+	<insert id="addOrUpdateDefender">
+		INSERT INTO defender (defender_id, name, age, sex, gender, population_group, profession, position, awards, alive, death_datetime, observation)
+		VALUES (#{defender_id}, #{name}, #{age}, #{sex}, #{gender}, #{population_group}, #{profession}, #{position}, #{awards}, #{alive}, #{death_datetime}, #{observation})
+		ON CONFLICT (defender_id) DO UPDATE
+		SET
+		name = #{name},
+		age = #{age},
+		sex = #{sex},
+		gender = #{gender},
+		population_group = #{population_group},
+		profession = #{profession},
+		position = #{position},
+		awards = #{awards},
+		alive = #{alive},
+		death_datetime = #{death_datetime},
+		observation = #{observation};
+	</insert>
+
+</mapper>

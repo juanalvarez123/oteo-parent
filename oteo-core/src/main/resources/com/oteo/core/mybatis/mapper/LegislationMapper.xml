@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.LegislationMapper">
+
+	<sql id="legislationColumns">
+		${alias}.legislation_id AS ${alias}_legislation_id,
+		${alias}.country AS ${alias}_country,
+		${alias}.datetime AS ${alias}_datetime,
+		${alias}.organism AS ${alias}_organism,
+		${alias}.type AS ${alias}_type,
+		${alias}.name AS ${alias}_name,
+		${alias}.observation AS ${alias}_observation,
+		${alias}.link AS ${alias}_link,
+		${alias}.component AS ${alias}_component
+	</sql>
+
+	<resultMap id="legislationResultMap" type="com.oteo.core.mybatis.domain.Legislation">
+		<id property="legislationId" column="legislation_legislation_id" />
+		<result property="country" column="legislation_country"/>
+		<result property="datetime" column="legislation_datetime"/>
+		<result property="organism" column="legislation_organism"/>
+		<result property="type" column="legislation_type"/>
+		<result property="name" column="legislation_name"/>
+		<result property="observation" column="legislation_observation"/>
+		<result property="link" column="legislation_link"/>
+		<result property="component" column="legislation_component"/>
+	</resultMap>
+
+	<select id="getLegislationsByCountry" resultMap="legislationResultMap">
+		SELECT
+			<include refid="legislationColumns"><property name="alias" value="legislation"/></include>
+		FROM
+			legislation legislation
+		WHERE
+			legislation.country = #{country}
+	</select>
+
+	<insert id="addOrUpdateLegislation">
+		INSERT INTO legislation (legislation_id, country, datetime, organism, type, name, observation, link, component)
+		VALUES (#{legislation_id}, #{country}, #{datetime}, #{organism}, #{type}, #{name}, #{observation}, #{link}, #{component})
+		ON CONFLICT (legislation_id) DO UPDATE
+		SET
+		country = #{country},
+		datetime = #{datetime},
+		organism = #{organism},
+		type = #{type},
+		name = #{name},
+		observation = #{observation},
+		link = #{link},
+		component = #{component};
+	</insert>
+
+</mapper>

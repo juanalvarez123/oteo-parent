@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.OrganizationDefenderMapper">
+
+	<sql id="organizationDefenderColumns">
+		${alias}.defender_id AS ${alias}_defender_id,
+		${alias}.organization_id AS ${alias}_organization_id
+	</sql>
+
+	<resultMap id="organizationDefenderResultMap" type="com.oteo.core.mybatis.domain.OrganizationDefender">
+		<id property="defenderId" column="organization_defender_defender_id" />
+		<id property="organizationId" column="organization_defender_organization_id" />
+	</resultMap>
+
+	<select id="getDefendersByOrganizationId" resultMap="organizationDefenderResultMap">
+		SELECT
+			<include refid="organizationDefenderColumns"><property name="alias" value="organization_defender"/></include>
+		FROM
+			organization_defender organization_defender
+		WHERE
+			organization_defender.organization_id = #{organizationId}
+	</select>
+
+	<insert id="addOrUpdateOrganizationDefender">
+		INSERT INTO organization_defender (defender_id, organization_id)
+		VALUES (#{defender_id}, #{organization_id})
+		ON CONFLICT (defender_id, organization_id) DO NOTHING;
+	</insert>
+
+</mapper>
