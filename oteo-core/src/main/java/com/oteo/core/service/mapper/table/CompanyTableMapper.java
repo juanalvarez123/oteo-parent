@@ -1,9 +1,6 @@
 package com.oteo.core.service.mapper.table;
 
-import java.util.Arrays;
 import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 
 import com.oteo.core.service.mapper.model.CompanyCsvFile;
 
@@ -12,13 +9,7 @@ public class CompanyTableMapper implements TableMapper<CompanyCsvFile> {
 	@Override
 	public CompanyCsvFile map(final String line) {
 
-		String[] dataAsArray = line.split(";");
-		List<String> dataAsList = Arrays.asList(dataAsArray);
-		dataAsList.forEach(field -> {
-			if (StringUtils.isBlank(field)) {
-				field = null;
-			}
-		});
+		List<String> dataAsList = cleanRow(line);
 
 		return CompanyCsvFile.builder()
 				.id_empresa(dataAsList.get(0))

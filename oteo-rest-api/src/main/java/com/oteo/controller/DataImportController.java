@@ -27,7 +27,8 @@ public class DataImportController {
 		this.dataImportService = dataImportService;
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/file/{csvFile}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.POST, path = "/file/{csvFile}",
+			consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ImportResponse importDataFromCsvFile(
 			@RequestParam(name = "file", required = true) final MultipartFile file,
 			@PathVariable final CsvFile csvFile) throws ServiceException {

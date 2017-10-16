@@ -4,8 +4,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.oteo.core.mybatis.domain.Company;
 import com.oteo.core.mybatis.mapper.CompanyMapper;
-import com.oteo.core.service.importer.ImportResponse;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.CompanyCsvFile;
 
@@ -19,11 +19,9 @@ public class CompanyImporter implements Importer<CompanyCsvFile> {
 	}
 
 	@Override
-	public ImportResponse importRecords(final Map<Integer, CompanyCsvFile> records) {
+	public long iterateMap(final Map<Integer, CompanyCsvFile> records, StringBuilder summary) {
 
-		long recordsAddedOrUpdated = 0;
-		long recordsWithErrors = 0;
-		StringBuilder summary = new StringBuilder();
+		long recordsAddedOrUpdated = 0L;
 
 		for (Map.Entry<Integer, CompanyCsvFile> entry : records.entrySet()) {
 
@@ -31,24 +29,33 @@ public class CompanyImporter implements Importer<CompanyCsvFile> {
 			CompanyCsvFile companyCsvFile = entry.getValue();
 
 			if (StringUtils.isBlank(companyCsvFile.getId_empresa())) {
-				summary.append(line + ": id_empresa no puede ser vacio ni nulo, ");
-				recordsWithErrors++;
+				summary.append("Línea " + line + ": id_empresa no puede ser vacio ni nulo, ");
 				continue;
 			}
 
+			Company company = transformCompany(companyCsvFile);
+
 			try {
-				companyMapper.addOrUpdateCompany(companyCsvFile);
+				companyMapper.addOrUpdateCompany(company);
 				recordsAddedOrUpdated++;
 			} catch (Exception ex) {
 				summary.append(line + ": " + ex.getMessage() + "\n");
-				recordsWithErrors++;
 			}
 		}
 
-		return ImportResponse.builder()
-				.recordsAddedOrUpdated(recordsAddedOrUpdated)
-				.recordsWithErrors(recordsWithErrors)
-				.summary(StringUtils.isNotBlank(summary) ? summary.toString() : null)
+		return recordsAddedOrUpdated;
+	}
+
+	private Company transformCompany(final CompanyCsvFile companyCsvFile) {
+
+		return Company.builder()
+				.companyId(companyCsvFile.getId_empresa())
+				.name(companyCsvFile.getNombre_empresa())
+				.type(companyCsvFile.getTipo_empresa())
+				.country(companyCsvFile.getPais_empresa())
+				.participation(companyCsvFile.getParticipacion_empresa())
+				.description(companyCsvFile.getDescripcion())
+				.link(companyCsvFile.getLink())
 				.build();
 	}
 

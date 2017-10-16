@@ -35,14 +35,14 @@
 
 	<insert id="addOrUpdateCompany">
 		INSERT INTO company (company_id, name, type, country, participation, description, link)
-		VALUES (#{id_empresa}, #{nombre_empresa}, #{tipo_empresa}, #{pais_empresa}, #{participacion_empresa}, #{descripcion}, #{link})
+		VALUES (#{companyId}, #{name}, #{type}, #{country}, #{participation}, #{description}, #{link})
 		ON CONFLICT (company_id) DO UPDATE
 		SET
-		name = #{nombre_empresa},
-		type = #{tipo_empresa},
-		country = #{pais_empresa},
-		participation = #{participacion_empresa},
-		description = #{descripcion},
+		name = #{name},
+		type = #{type},
+		country = #{country},
+		participation = #{participation},
+		description = #{description},
 		link = #{link};
 	</insert>
 

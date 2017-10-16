@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.ActivityOrganizationMapper">
+
+	<sql id="activityOrganizationColumns">
+		${alias}.activity_organization_id AS ${alias}_activity_organization_id,
+		${alias}.organization_id AS ${alias}_organization_id,
+		${alias}.strength_type AS ${alias}_strength_type,
+		${alias}.strength_description AS ${alias}_strength_description,
+		${alias}.results AS ${alias}_results,
+		${alias}.result_name AS ${alias}_result_name,
+		${alias}.datetime AS ${alias}_datetime,
+		${alias}.link AS ${alias}_link
+	</sql>
+
+	<resultMap id="activityOrganizationResultMap" type="com.oteo.core.mybatis.domain.ActivityOrganization">
+		<id property="activityOrganizationId" column="activity_organization_activity_organization_id" />
+		<result property="organizationId" column="activity_organization_organization_id"/>
+		<result property="strengthType" column="activity_organization_strength_type"/>
+		<result property="strengthDescription" column="activity_organization_strength_description"/>
+		<result property="results" column="activity_organization_results"/>
+		<result property="resultName" column="activity_organization_result_name"/>
+		<result property="datetime" column="activity_organization_datetime"/>
+		<result property="link" column="activity_organization_link"/>
+	</resultMap>
+
+	<select id="getActivityOrganizationById" resultMap="activityOrganizationResultMap">
+		SELECT
+			<include refid="activityOrganizationColumns"><property name="alias" value="activity_organization"/></include>
+		FROM
+			activity_organization activity_organization
+		WHERE
+			activity_organization.activity_organization_id = #{activityOrganizationId}
+	</select>
+
+	<select id="getActivityOrganizationByOrganizationId" resultMap="activityOrganizationResultMap">
+		SELECT
+			<include refid="activityOrganizationColumns"><property name="alias" value="activity_organization"/></include>
+		FROM
+			activity_organization activity_organization
+		WHERE
+			activity_organization.organization_id = #{organizationId}
+	</select>
+
+	<insert id="addOrUpdateActivityOrganization">
+		INSERT INTO activity_organization (activity_organization_id, organization_id, strength_type, strength_description, results, result_name, datetime, link)
+		VALUES (#{activityOrganizationId}, #{organizationId}, #{strengthType}, #{strengthDescription}, #{results}, #{resultName}, #{datetime}, #{link})
+		ON CONFLICT (activity_organization_id, organization_id) DO UPDATE
+		SET
+		strength_type = #{strengthType},
+		strength_description = #{strengthDescription},
+		results = #{results},
+		result_name = #{resultName},
+		datetime = #{datetime},
+		link = #{link};
+	</insert>
+
+</mapper>

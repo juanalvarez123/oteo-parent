@@ -2,6 +2,8 @@ package com.oteo.core.util;
 
 public enum CsvFile {
 
-	COMPANY
+	COMPANY,
+	ORGANIZATION,
+	ACTIVITY_ORGANIZATION;
 
 }

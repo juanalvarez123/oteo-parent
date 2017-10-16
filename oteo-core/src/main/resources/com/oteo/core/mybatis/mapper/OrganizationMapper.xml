@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.OrganizationMapper">
+
+	<sql id="organizationColumns">
+		${alias}.organization_id AS ${alias}_organization_id,
+		${alias}.name AS ${alias}_name,
+		${alias}.country AS ${alias}_country,
+		${alias}.organization_class AS ${alias}_organization_class,
+		${alias}.type AS ${alias}_type,
+		${alias}.goal AS ${alias}_goal,
+		${alias}.link AS ${alias}_link,
+		${alias}.active AS ${alias}_active
+	</sql>
+
+	<resultMap id="organizationResultMap" type="com.oteo.core.mybatis.domain.Organization">
+		<id property="organizationId" column="organization_organization_id"/>
+		<result property="name" column="organization_name"/>
+		<result property="country" column="organization_country"/>
+		<result property="place" column="organization_place"/>
+		<result property="organizationClass" column="organization_organization_class"/>
+		<result property="type" column="organization_type"/>
+		<result property="goal" column="organization_goal"/>
+		<result property="link" column="organization_link"/>
+		<result property="active" column="organization_active" />
+	</resultMap>
+
+	<select id="getOrganizationById" resultMap="organizationResultMap">
+		SELECT
+			<include refid="organizationColumns"><property name="alias" value="organization"/></include>
+		FROM
+			organization organization
+		WHERE
+			organization.organization_id = #{organizationId}
+	</select>
+
+	<insert id="addOrUpdateOrganization">
+		INSERT INTO organization (organization_id, name, country, place, organization_class, type, goal, link, active)
+		VALUES (#{organizationId}, #{name}, #{country}, #{place}, #{organizationClass}, #{type}, #{goal}, #{link}, #{active})
+		ON CONFLICT (organization_id) DO UPDATE
+		SET
+		name = #{name},
+		country = #{country},
+		place = #{place},
+		organization_class = #{organizationClass},
+		type = #{type},
+		goal = #{goal},
+		link = #{link},
+		active = #{active};
+	</insert>
+
+</mapper>
