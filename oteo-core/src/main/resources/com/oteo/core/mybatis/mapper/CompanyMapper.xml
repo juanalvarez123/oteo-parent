@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.CompanyMapper">
+
+	<sql id="companyColumns">
+		${alias}.company_id AS ${alias}_company_id,
+		${alias}.name AS ${alias}_name,
+		${alias}.type AS ${alias}_type,
+		${alias}.country AS ${alias}_country,
+		${alias}.participation AS ${alias}_participation,
+		${alias}.description AS ${alias}_description,
+		${alias}.link AS ${alias}_link
+	</sql>
+
+	<resultMap id="companyResultMap" type="com.oteo.core.mybatis.domain.Company">
+		<id property="companyId" column="company_company_id" />
+		<result property="name" column="company_name"/>
+		<result property="type" column="company_type"/>
+		<result property="country" column="company_country"/>
+		<result property="participation" column="company_participation"/>
+		<result property="description" column="company_description"/>
+		<result property="link" column="company_link"/>
+	</resultMap>
+
+	<select id="getCompanyById" resultMap="companyResultMap">
+		SELECT
+			<include refid="companyColumns"><property name="alias" value="company"/></include>
+		FROM
+			company company
+		WHERE
+			company.company_id = #{companyId}
+	</select>
+
+	<insert id="addOrUpdateCompany">
+		INSERT INTO company (company_id, name, type, country, participation, description, link)
+		VALUES (#{id_empresa}, #{nombre_empresa}, #{tipo_empresa}, #{pais_empresa}, #{participacion_empresa}, #{descripcion}, #{link})
+		ON CONFLICT (company_id) DO UPDATE
+		SET
+		name = #{nombre_empresa},
+		type = #{tipo_empresa},
+		country = #{pais_empresa},
+		participation = #{participacion_empresa},
+		description = #{descripcion},
+		link = #{link};
+	</insert>
+
+</mapper>

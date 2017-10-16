@@ -1,4 +1,4 @@
-package com.oteo.core.service;
+package com.oteo.core.service.internal.impl;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,11 +6,13 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Service;
 
+import com.oteo.core.service.internal.DatabaseService;
 import com.oteo.core.util.EnvironmentVariable;
 
 @Service
-public class DatabaseService {
+class DatabaseServiceImpl implements DatabaseService {
 
+	@Override
 	public boolean isDatabaseActive() throws SQLException {
 
 		Connection connection = DriverManager.getConnection(

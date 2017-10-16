@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.oteo.core.mybatis.mapper.EnvironmentMapper;
-import com.oteo.core.service.DatabaseService;
+import com.oteo.core.service.internal.DatabaseService;
 import com.oteo.model.response.ApiGenericResponse;
 
 @CrossOrigin(allowedHeaders = "*", allowCredentials = "true")
@@ -27,7 +28,7 @@ public class HealthCheckController {
 		this.environmentMapper = environmentMapper;
 	}
 
-	@RequestMapping(path = "/healthcheck", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(method = RequestMethod.GET, path = "/healthcheck", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ApiGenericResponse getHealthCheck() throws SQLException {
 
 		boolean isDatabaseStatusActive = databaseService.isDatabaseActive();
