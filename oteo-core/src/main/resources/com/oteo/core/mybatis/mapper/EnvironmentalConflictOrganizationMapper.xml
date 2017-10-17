@@ -25,7 +25,7 @@
 
 	<insert id="addOrUpdateEnvironmentalConflictOrganization">
 		INSERT INTO environmental_conflict_organization (environmental_conflict_id, organization_id)
-		VALUES (#{environmental_conflict_id}, #{organization_id})
+		VALUES (#{environmentalConflictId}, #{organizationId})
 		ON CONFLICT (environmental_conflict_id, organization_id) DO NOTHING;
 	</insert>
 

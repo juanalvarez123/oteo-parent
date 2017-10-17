@@ -45,19 +45,19 @@
 
 	<insert id="addOrUpdateDefender">
 		INSERT INTO defender (defender_id, name, age, sex, gender, population_group, profession, position, awards, alive, death_datetime, observation)
-		VALUES (#{defender_id}, #{name}, #{age}, #{sex}, #{gender}, #{population_group}, #{profession}, #{position}, #{awards}, #{alive}, #{death_datetime}, #{observation})
+		VALUES (#{defenderId}, #{name}, #{age}, #{sex}, #{gender}, #{populationGroup}, #{profession}, #{position}, #{awards}, #{alive}, #{deathDatetime}, #{observation})
 		ON CONFLICT (defender_id) DO UPDATE
 		SET
 		name = #{name},
 		age = #{age},
 		sex = #{sex},
 		gender = #{gender},
-		population_group = #{population_group},
+		population_group = #{populationGroup},
 		profession = #{profession},
 		position = #{position},
 		awards = #{awards},
 		alive = #{alive},
-		death_datetime = #{death_datetime},
+		death_datetime = #{deathDatetime},
 		observation = #{observation};
 	</insert>
 

@@ -35,10 +35,10 @@
 
 	<insert id="addOrUpdateHumanRightViolation">
 		INSERT INTO human_right_violation (human_right_violation_id, defender_id, attack, responsible, datetime, observation, link)
-		VALUES (#{human_right_violation_id}, #{defender_id}, #{attack}, #{responsible}, #{datetime}, #{observation}, #{link})
+		VALUES (#{humanRightViolationId}, #{defenderId}, #{attack}, #{responsible}, #{datetime}, #{observation}, #{link})
 		ON CONFLICT (human_right_violation_id) DO UPDATE
 		SET
-		defender_id = #{defender_id},
+		defender_id = #{defenderId},
 		attack = #{attack},
 		responsible = #{responsible},
 		datetime = #{datetime},

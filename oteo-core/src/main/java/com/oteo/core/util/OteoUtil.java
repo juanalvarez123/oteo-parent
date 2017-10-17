@@ -26,7 +26,37 @@ public class OteoUtil {
 			return null;
 		}
 
-		return LocalDate.parse(source, DateTimeFormatter.ofPattern("M/d/yyyy"));
+		try {
+			return LocalDate.parse(source, DateTimeFormatter.ofPattern("M/d/yyyy"));
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+
+	public static Integer getIntegerFromString(final String source) {
+
+		if (StringUtils.isBlank(source)) {
+			return null;
+		}
+
+		try {
+			return Integer.parseInt(source);
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+
+	public static Double getDoubleFromString(final String source) {
+
+		if (StringUtils.isBlank(source)) {
+			return null;
+		}
+
+		try {
+			return Double.parseDouble(source.replace(",", "."));
+		} catch (Exception ex) {
+			return null;
+		}
 	}
 
 }

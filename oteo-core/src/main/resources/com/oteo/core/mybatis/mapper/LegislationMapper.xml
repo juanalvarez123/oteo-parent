@@ -39,7 +39,7 @@
 
 	<insert id="addOrUpdateLegislation">
 		INSERT INTO legislation (legislation_id, country, datetime, organism, type, name, observation, link, component)
-		VALUES (#{legislation_id}, #{country}, #{datetime}, #{organism}, #{type}, #{name}, #{observation}, #{link}, #{component})
+		VALUES (#{legislationId}, #{country}, #{datetime}, #{organism}, #{type}, #{name}, #{observation}, #{link}, #{component})
 		ON CONFLICT (legislation_id) DO UPDATE
 		SET
 		country = #{country},

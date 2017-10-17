@@ -25,7 +25,7 @@
 
 	<insert id="addOrUpdateOrganizationDefender">
 		INSERT INTO organization_defender (defender_id, organization_id)
-		VALUES (#{defender_id}, #{organization_id})
+		VALUES (#{defenderId}, #{organizationId})
 		ON CONFLICT (defender_id, organization_id) DO NOTHING;
 	</insert>
 

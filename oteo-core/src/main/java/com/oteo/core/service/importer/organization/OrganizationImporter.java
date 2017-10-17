@@ -1,4 +1,4 @@
-package com.oteo.core.service.importer.company;
+package com.oteo.core.service.importer.organization;
 
 import java.util.Map;
 

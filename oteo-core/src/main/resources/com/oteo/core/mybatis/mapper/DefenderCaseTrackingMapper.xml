@@ -35,10 +35,9 @@
 
 	<insert id="addOrUpdateDefenderCaseTracking">
 		INSERT INTO defender_case_tracking (defender_case_tracking_id, defender_id, name, progress, datetime, observation, link)
-		VALUES (#{defender_case_tracking_id}, #{defender_id}, #{name}, #{progress}, #{datetime}, #{observation}, #{link})
-		ON CONFLICT (defender_case_tracking_id) DO UPDATE
+		VALUES (#{defenderCaseTrackingId}, #{defenderId}, #{name}, #{progress}, #{datetime}, #{observation}, #{link})
+		ON CONFLICT (defender_case_tracking_id, defender_id) DO UPDATE
 		SET
-		defender_id = #{defender_id},
 		name = #{name},
 		progress = #{progress},
 		datetime = #{datetime},

@@ -47,9 +47,8 @@
 	<insert id="addOrUpdateActivityOrganization">
 		INSERT INTO activity_organization (activity_organization_id, organization_id, strength_type, strength_description, results, result_name, datetime, link)
 		VALUES (#{activityOrganizationId}, #{organizationId}, #{strengthType}, #{strengthDescription}, #{results}, #{resultName}, #{datetime}, #{link})
-		ON CONFLICT (activity_organization_id) DO UPDATE
+		ON CONFLICT (activity_organization_id, organization_id) DO UPDATE
 		SET
-		organization_id = #{organization_id},
 		strength_type = #{strengthType},
 		strength_description = #{strengthDescription},
 		results = #{results},

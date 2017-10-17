@@ -1,8 +1,9 @@
-package com.oteo.core.service.mapper.table;
+package com.oteo.core.service.mapper.table.organization;
 
 import java.util.List;
 
 import com.oteo.core.service.mapper.model.ActivityOrganizationCsvFile;
+import com.oteo.core.service.mapper.table.TableMapper;
 
 public class ActivityOrganizationTableMapper implements TableMapper<ActivityOrganizationCsvFile> {
 

@@ -1,4 +1,4 @@
-package com.oteo.core.service.importer.company;
+package com.oteo.core.service.importer.organization;
 
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public class ActivityOrganizationImporter implements Importer<ActivityOrganizati
 			}
 
 			if (StringUtils.isBlank(activityOrganizationCsvFile.getId_organizacion())) {
-				summary.append("Línea " + line + ": id_organization no puede ser vacio ni nulo, ");
+				summary.append("Línea " + line + ": id_organizacion no puede ser vacio ni nulo, ");
 				continue;
 			}
 
@@ -49,7 +49,7 @@ public class ActivityOrganizationImporter implements Importer<ActivityOrganizati
 					.getOrganizationById(activityOrganizationCsvFile.getId_organizacion());
 
 			if (null == organization) {
-				summary.append("Línea " + line + ": La organización con id_organization: "
+				summary.append("Línea " + line + ": La organización con id_organizacion: "
 						+ activityOrganizationCsvFile.getId_organizacion() + " no existe, ");
 				continue;
 			}

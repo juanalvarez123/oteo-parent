@@ -34,6 +34,15 @@
 		<result property="link" column="environmental_conflict_link"/>
 	</resultMap>
 
+	<select id="getEnvironmentalConflictById" resultMap="environmentalConflictResultMap">
+		SELECT
+			<include refid="environmentalConflictColumns"><property name="alias" value="environmental_conflict"/></include>
+		FROM
+			environmental_conflict environmental_conflict
+		WHERE
+			environmental_conflict.environmental_conflict_id = #{environmentalConflictId}
+	</select>
+
 	<select id="getEnvironmentalConflictsByCountry" resultMap="environmentalConflictResultMap">
 		SELECT
 			<include refid="environmentalConflictColumns"><property name="alias" value="environmental_conflict"/></include>
@@ -45,7 +54,7 @@
 
 	<insert id="addOrUpdateEnvironmentalConflict">
 		INSERT INTO environmental_conflict (environmental_conflict_id, country, place, name, latitude, longitude, datetime, conflict, extractivism, resources, source, link)
-		VALUES (#{environmental_conflict_id}, #{country}, #{place}, #{name}, #{latitude}, #{longitude}, #{datetime}, #{conflict}, #{extractivism}, #{resources}, #{source}, #{link})
+		VALUES (#{environmentalConflictId}, #{country}, #{place}, #{name}, #{latitude}, #{longitude}, #{datetime}, #{conflict}, #{extractivism}, #{resources}, #{source}, #{link})
 		ON CONFLICT (environmental_conflict_id) DO UPDATE
 		SET
 		country = #{country},
