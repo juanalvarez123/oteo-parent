@@ -2,31 +2,31 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.oteo.core.mybatis.mapper.EnvironmentalConflictOrganizationMapper">
+<mapper namespace="com.oteo.core.mybatis.mapper.EnvironmentalConflictCompanyMapper">
 
-	<sql id="environmentalConflictOrganizationColumns">
+	<sql id="environmentalConflictCompanyColumns">
 		${alias}.environmental_conflict_id AS ${alias}_environmental_conflict_id,
-		${alias}.organization_id AS ${alias}_organization_id
+		${alias}.company_id AS ${alias}_company_id
 	</sql>
 
-	<resultMap id="environmentalConflictOrganizationResultMap" type="com.oteo.core.mybatis.domain.EnvironmentalConflictOrganization">
-		<id property="environmentalConflictId" column="environmental_conflict_organization_environmental_conflict_id" />
-		<id property="organizationId" column="environmental_conflict_organization_organization_id" />
+	<resultMap id="environmentalConflictCompanyResultMap" type="com.oteo.core.mybatis.domain.EnvironmentalConflictCompany">
+		<id property="environmentalConflictId" column="environmental_conflict_company_environmental_conflict_id" />
+		<id property="companyId" column="environmental_conflict_company_company_id" />
 	</resultMap>
 
-	<select id="getEnvironmentalConflictsByOrganizationId" resultMap="environmentalConflictOrganizationResultMap">
+	<select id="getEnvironmentalConflictsByCompanyId" resultMap="environmentalConflictCompanyResultMap">
 		SELECT
-			<include refid="environmentalConflictOrganizationColumns"><property name="alias" value="environmental_conflict_organization"/></include>
+			<include refid="environmentalConflictCompanyColumns"><property name="alias" value="environmental_conflict_company"/></include>
 		FROM
-			environmental_conflict_organization environmental_conflict_organization
+			environmental_conflict_company environmental_conflict_company
 		WHERE
-			environmental_conflict_organization.organization_id = #{organizationId}
+			environmental_conflict_company.company_id = #{companyId}
 	</select>
 
-	<insert id="addOrUpdateEnvironmentalConflictOrganization">
-		INSERT INTO environmental_conflict_organization (environmental_conflict_id, organization_id)
-		VALUES (#{environmental_conflict_id}, #{organization_id})
-		ON CONFLICT (environmental_conflict_id, organization_id) DO NOTHING;
+	<insert id="addOrUpdateEnvironmentalConflictCompany">
+		INSERT INTO environmental_conflict_company (environmental_conflict_id, company_id)
+		VALUES (#{environmental_conflict_id}, #{company_id})
+		ON CONFLICT (environmental_conflict_id, company_id) DO NOTHING;
 	</insert>
 
 </mapper>

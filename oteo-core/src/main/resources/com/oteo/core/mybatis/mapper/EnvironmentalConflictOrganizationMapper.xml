@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.oteo.core.mybatis.mapper.EnvironmentalConflictOrganizationMapper">
+
+	<sql id="environmentalConflictOrganizationColumns">
+		${alias}.environmental_conflict_id AS ${alias}_environmental_conflict_id,
+		${alias}.organization_id AS ${alias}_organization_id
+	</sql>
+
+	<resultMap id="environmentalConflictOrganizationResultMap" type="com.oteo.core.mybatis.domain.EnvironmentalConflictOrganization">
+		<id property="environmentalConflictId" column="environmental_conflict_organization_environmental_conflict_id" />
+		<id property="organizationId" column="environmental_conflict_organization_organization_id" />
+	</resultMap>
+
+	<select id="getEnvironmentalConflictsByOrganizationId" resultMap="environmentalConflictOrganizationResultMap">
+		SELECT
+			<include refid="environmentalConflictOrganizationColumns"><property name="alias" value="environmental_conflict_organization"/></include>
+		FROM
+			environmental_conflict_organization environmental_conflict_organization
+		WHERE
+			environmental_conflict_organization.organization_id = #{organizationId}
+	</select>
+
+	<insert id="addOrUpdateEnvironmentalConflictOrganization">
+		INSERT INTO environmental_conflict_organization (environmental_conflict_id, organization_id)
+		VALUES (#{environmental_conflict_id}, #{organization_id})
+		ON CONFLICT (environmental_conflict_id, organization_id) DO NOTHING;
+	</insert>
+
+</mapper>
