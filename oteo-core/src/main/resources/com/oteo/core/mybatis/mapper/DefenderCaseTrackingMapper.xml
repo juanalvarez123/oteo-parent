@@ -34,15 +34,19 @@
 	</select>
 
 	<insert id="addOrUpdateDefenderCaseTracking">
-		INSERT INTO defender_case_tracking (defender_case_tracking_id, defender_id, name, progress, datetime, observation, link)
-		VALUES (#{defenderCaseTrackingId}, #{defenderId}, #{name}, #{progress}, #{datetime}, #{observation}, #{link})
+		INSERT INTO defender_case_tracking (defender_case_tracking_id, defender_id, name, progress, datetime, observation, link,
+			created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{defenderCaseTrackingId}, #{defenderId}, #{name}, #{progress}, #{datetime}, #{observation}, #{link},
+			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (defender_case_tracking_id, defender_id) DO UPDATE
 		SET
 		name = #{name},
 		progress = #{progress},
 		datetime = #{datetime},
 		observation = #{observation},
-		link = #{link};
+		link = #{link},
+		modified_by = #{modifiedBy},
+		modified_datetime = #{modifiedDatetime};
 	</insert>
 
 </mapper>

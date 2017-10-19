@@ -24,8 +24,10 @@
 	</select>
 
 	<insert id="addOrUpdateOrganizationDefender">
-		INSERT INTO organization_defender (defender_id, organization_id)
-		VALUES (#{defenderId}, #{organizationId})
+		INSERT INTO organization_defender (defender_id, organization_id,
+			created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{defenderId}, #{organizationId},
+			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (defender_id, organization_id) DO NOTHING;
 	</insert>
 

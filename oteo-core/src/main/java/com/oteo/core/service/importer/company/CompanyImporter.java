@@ -8,6 +8,8 @@ import com.oteo.core.mybatis.domain.Company;
 import com.oteo.core.mybatis.mapper.CompanyMapper;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.CompanyCsvFile;
+import com.oteo.core.util.OteoConstant;
+import com.oteo.core.util.OteoUtil;
 
 public class CompanyImporter implements Importer<CompanyCsvFile> {
 
@@ -56,6 +58,10 @@ public class CompanyImporter implements Importer<CompanyCsvFile> {
 				.participation(companyCsvFile.getParticipacion_empresa())
 				.description(companyCsvFile.getDescripcion())
 				.link(companyCsvFile.getLink())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

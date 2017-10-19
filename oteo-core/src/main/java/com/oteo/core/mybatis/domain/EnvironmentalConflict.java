@@ -1,6 +1,7 @@
 package com.oteo.core.mybatis.domain;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,5 +37,13 @@ public class EnvironmentalConflict {
 	private String source;
 
 	private String link;
+
+	private String createdBy;
+
+	private ZonedDateTime createdDatetime;
+
+	private String modifiedBy;
+
+	private ZonedDateTime modifiedDatetime;
 
 }

@@ -1,5 +1,7 @@
 package com.oteo.core.mybatis.domain;
 
+import java.time.ZonedDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,5 +30,13 @@ public class Organization {
 	private String link;
 
 	private Boolean active;
+
+	private String createdBy;
+
+	private ZonedDateTime createdDatetime;
+
+	private String modifiedBy;
+
+	private ZonedDateTime modifiedDatetime;
 
 }

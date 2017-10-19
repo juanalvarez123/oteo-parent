@@ -34,8 +34,10 @@
 	</select>
 
 	<insert id="addOrUpdateCompany">
-		INSERT INTO company (company_id, name, type, country, participation, description, link)
-		VALUES (#{companyId}, #{name}, #{type}, #{country}, #{participation}, #{description}, #{link})
+		INSERT INTO company (company_id, name, type, country, participation, description, link,
+			created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{companyId}, #{name}, #{type}, #{country}, #{participation}, #{description}, #{link},
+			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (company_id) DO UPDATE
 		SET
 		name = #{name},
@@ -43,7 +45,9 @@
 		country = #{country},
 		participation = #{participation},
 		description = #{description},
-		link = #{link};
+		link = #{link},
+		modified_by = #{modifiedBy},
+		modified_datetime = #{modifiedDatetime};
 	</insert>
 
 </mapper>

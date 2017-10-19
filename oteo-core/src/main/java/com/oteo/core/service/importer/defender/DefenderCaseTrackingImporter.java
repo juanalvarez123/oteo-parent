@@ -10,6 +10,7 @@ import com.oteo.core.mybatis.mapper.DefenderCaseTrackingMapper;
 import com.oteo.core.mybatis.mapper.DefenderMapper;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.DefenderCaseTrackingCsvFile;
+import com.oteo.core.util.OteoConstant;
 import com.oteo.core.util.OteoUtil;
 
 public class DefenderCaseTrackingImporter implements Importer<DefenderCaseTrackingCsvFile> {
@@ -78,6 +79,10 @@ public class DefenderCaseTrackingImporter implements Importer<DefenderCaseTracki
 				.datetime(OteoUtil.getLocalDateFromString(defenderCaseTrackingCsvFile.getFecha()))
 				.observation(defenderCaseTrackingCsvFile.getObservacion())
 				.link(defenderCaseTrackingCsvFile.getLink())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

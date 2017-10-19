@@ -10,6 +10,7 @@ import com.oteo.core.mybatis.mapper.ActivityOrganizationMapper;
 import com.oteo.core.mybatis.mapper.OrganizationMapper;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.ActivityOrganizationCsvFile;
+import com.oteo.core.util.OteoConstant;
 import com.oteo.core.util.OteoUtil;
 
 public class ActivityOrganizationImporter implements Importer<ActivityOrganizationCsvFile> {
@@ -79,6 +80,10 @@ public class ActivityOrganizationImporter implements Importer<ActivityOrganizati
 				.resultName(activityOrganizationCsvFile.getNombre_material())
 				.datetime(OteoUtil.getLocalDateFromString(activityOrganizationCsvFile.getFecha()))
 				.link(activityOrganizationCsvFile.getLink())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

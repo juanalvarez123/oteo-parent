@@ -24,8 +24,10 @@
 	</select>
 
 	<insert id="addOrUpdateEnvironmentalConflictCompany">
-		INSERT INTO environmental_conflict_company (environmental_conflict_id, company_id)
-		VALUES (#{environmentalConflictId}, #{companyId})
+		INSERT INTO environmental_conflict_company (environmental_conflict_id, company_id,
+			created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{environmentalConflictId}, #{companyId},
+			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (environmental_conflict_id, company_id) DO NOTHING;
 	</insert>
 

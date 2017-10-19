@@ -12,6 +12,8 @@ import com.oteo.core.mybatis.mapper.OrganizationDefenderMapper;
 import com.oteo.core.mybatis.mapper.OrganizationMapper;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.OrganizationDefenderCsvFile;
+import com.oteo.core.util.OteoConstant;
+import com.oteo.core.util.OteoUtil;
 
 public class OrganizationDefenderImporter implements Importer<OrganizationDefenderCsvFile> {
 
@@ -86,6 +88,10 @@ public class OrganizationDefenderImporter implements Importer<OrganizationDefend
 		return OrganizationDefender.builder()
 				.defenderId(organizationDefenderCsvFile.getId_defensorx())
 				.organizationId(organizationDefenderCsvFile.getId_organizacion())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

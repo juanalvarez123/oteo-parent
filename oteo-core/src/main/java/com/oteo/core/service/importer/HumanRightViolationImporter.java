@@ -9,6 +9,7 @@ import com.oteo.core.mybatis.domain.HumanRightViolation;
 import com.oteo.core.mybatis.mapper.DefenderMapper;
 import com.oteo.core.mybatis.mapper.HumanRightViolationMapper;
 import com.oteo.core.service.mapper.model.HumanRightViolationCsvFile;
+import com.oteo.core.util.OteoConstant;
 import com.oteo.core.util.OteoUtil;
 
 public class HumanRightViolationImporter implements Importer<HumanRightViolationCsvFile> {
@@ -76,6 +77,10 @@ public class HumanRightViolationImporter implements Importer<HumanRightViolation
 				.datetime(OteoUtil.getLocalDateFromString(humanRightViolationCsvFile.getFecha()))
 				.observation(humanRightViolationCsvFile.getObservaciones())
 				.link(humanRightViolationCsvFile.getLink())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

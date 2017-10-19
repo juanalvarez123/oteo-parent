@@ -12,6 +12,8 @@ import com.oteo.core.mybatis.mapper.EnvironmentalConflictCompanyMapper;
 import com.oteo.core.mybatis.mapper.EnvironmentalConflictMapper;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.EnvironmentalConflictCompanyCsvFile;
+import com.oteo.core.util.OteoConstant;
+import com.oteo.core.util.OteoUtil;
 
 public class EnvironmentalConflictCompanyImporter implements Importer<EnvironmentalConflictCompanyCsvFile> {
 
@@ -88,6 +90,10 @@ public class EnvironmentalConflictCompanyImporter implements Importer<Environmen
 		return EnvironmentalConflictCompany.builder()
 				.environmentalConflictId(environmentalConflictCompanyCsvFile.getId_conflicto())
 				.companyId(environmentalConflictCompanyCsvFile.getId_empresa())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

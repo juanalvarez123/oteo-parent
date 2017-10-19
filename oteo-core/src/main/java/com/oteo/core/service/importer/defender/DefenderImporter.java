@@ -8,6 +8,7 @@ import com.oteo.core.mybatis.domain.Defender;
 import com.oteo.core.mybatis.mapper.DefenderMapper;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.DefenderCsvFile;
+import com.oteo.core.util.OteoConstant;
 import com.oteo.core.util.OteoUtil;
 
 public class DefenderImporter implements Importer<DefenderCsvFile> {
@@ -62,6 +63,10 @@ public class DefenderImporter implements Importer<DefenderCsvFile> {
 				.alive(OteoUtil.getBooleanFromString(defenderCsvFile.getVivx()))
 				.deathDatetime(OteoUtil.getLocalDateFromString(defenderCsvFile.getFecha_muerte()))
 				.observation(defenderCsvFile.getObservacion())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

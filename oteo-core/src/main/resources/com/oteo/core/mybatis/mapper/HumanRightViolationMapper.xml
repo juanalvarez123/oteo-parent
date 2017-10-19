@@ -34,8 +34,10 @@
 	</select>
 
 	<insert id="addOrUpdateHumanRightViolation">
-		INSERT INTO human_right_violation (human_right_violation_id, defender_id, attack, responsible, datetime, observation, link)
-		VALUES (#{humanRightViolationId}, #{defenderId}, #{attack}, #{responsible}, #{datetime}, #{observation}, #{link})
+		INSERT INTO human_right_violation (human_right_violation_id, defender_id, attack, responsible, datetime, observation, link,
+			created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{humanRightViolationId}, #{defenderId}, #{attack}, #{responsible}, #{datetime}, #{observation}, #{link},
+			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (human_right_violation_id) DO UPDATE
 		SET
 		defender_id = #{defenderId},
@@ -43,7 +45,9 @@
 		responsible = #{responsible},
 		datetime = #{datetime},
 		observation = #{observation},
-		link = #{link};
+		link = #{link},
+		modified_by = #{modifiedBy},
+		modified_datetime = #{modifiedDatetime};
 	</insert>
 
 </mapper>

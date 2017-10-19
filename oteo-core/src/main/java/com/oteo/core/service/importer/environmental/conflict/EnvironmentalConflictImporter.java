@@ -8,6 +8,7 @@ import com.oteo.core.mybatis.domain.EnvironmentalConflict;
 import com.oteo.core.mybatis.mapper.EnvironmentalConflictMapper;
 import com.oteo.core.service.importer.Importer;
 import com.oteo.core.service.mapper.model.EnvironmentalConflictCsvFile;
+import com.oteo.core.util.OteoConstant;
 import com.oteo.core.util.OteoUtil;
 
 public class EnvironmentalConflictImporter implements Importer<EnvironmentalConflictCsvFile> {
@@ -64,6 +65,10 @@ public class EnvironmentalConflictImporter implements Importer<EnvironmentalConf
 				.resources(environmentalConflictCsvFile.getRecursos())
 				.source(environmentalConflictCsvFile.getFuente())
 				.link(environmentalConflictCsvFile.getLink())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 

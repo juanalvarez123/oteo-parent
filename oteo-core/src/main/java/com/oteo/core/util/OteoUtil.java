@@ -1,6 +1,7 @@
 package com.oteo.core.util;
 
 import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 import org.apache.commons.lang3.StringUtils;
@@ -57,6 +58,11 @@ public class OteoUtil {
 		} catch (Exception ex) {
 			return null;
 		}
+	}
+
+	public static ZonedDateTime now() {
+
+		return ZonedDateTime.now();
 	}
 
 }

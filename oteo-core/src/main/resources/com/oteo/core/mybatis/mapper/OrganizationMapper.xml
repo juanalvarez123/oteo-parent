@@ -37,8 +37,10 @@
 	</select>
 
 	<insert id="addOrUpdateOrganization">
-		INSERT INTO organization (organization_id, name, country, place, organization_class, type, goal, link, active)
-		VALUES (#{organizationId}, #{name}, #{country}, #{place}, #{organizationClass}, #{type}, #{goal}, #{link}, #{active})
+		INSERT INTO organization (organization_id, name, country, place, organization_class, type, goal, link, active,
+			created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{organizationId}, #{name}, #{country}, #{place}, #{organizationClass}, #{type}, #{goal}, #{link}, #{active},
+			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (organization_id) DO UPDATE
 		SET
 		name = #{name},
@@ -48,7 +50,9 @@
 		type = #{type},
 		goal = #{goal},
 		link = #{link},
-		active = #{active};
+		active = #{active},
+		modified_by = #{modifiedBy},
+		modified_datetime = #{modifiedDatetime};
 	</insert>
 
 </mapper>

@@ -44,8 +44,10 @@
 	</select>
 
 	<insert id="addOrUpdateDefender">
-		INSERT INTO defender (defender_id, name, age, sex, gender, population_group, profession, position, awards, alive, death_datetime, observation)
-		VALUES (#{defenderId}, #{name}, #{age}, #{sex}, #{gender}, #{populationGroup}, #{profession}, #{position}, #{awards}, #{alive}, #{deathDatetime}, #{observation})
+		INSERT INTO defender (defender_id, name, age, sex, gender, population_group, profession, position, awards, alive, death_datetime, observation,
+			created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{defenderId}, #{name}, #{age}, #{sex}, #{gender}, #{populationGroup}, #{profession}, #{position}, #{awards}, #{alive}, #{deathDatetime}, #{observation},
+			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (defender_id) DO UPDATE
 		SET
 		name = #{name},
@@ -58,7 +60,9 @@
 		awards = #{awards},
 		alive = #{alive},
 		death_datetime = #{deathDatetime},
-		observation = #{observation};
+		observation = #{observation},
+		modified_by = #{modifiedBy},
+		modified_datetime = #{modifiedDatetime};
 	</insert>
 
 </mapper>

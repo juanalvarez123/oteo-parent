@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.oteo.core.mybatis.domain.Legislation;
 import com.oteo.core.mybatis.mapper.LegislationMapper;
 import com.oteo.core.service.mapper.model.LegislationCsvFile;
+import com.oteo.core.util.OteoConstant;
 import com.oteo.core.util.OteoUtil;
 
 public class LegislationImporter implements Importer<LegislationCsvFile> {
@@ -58,6 +59,10 @@ public class LegislationImporter implements Importer<LegislationCsvFile> {
 				.observation(legislationCsvFile.getObservaciones())
 				.link(legislationCsvFile.getLink())
 				.component(legislationCsvFile.getComponente())
+				.createdBy(OteoConstant.OTEO_ADMIN_USER)
+				.createdDatetime(OteoUtil.now())
+				.modifiedBy(OteoConstant.OTEO_ADMIN_USER)
+				.modifiedDatetime(OteoUtil.now())
 				.build();
 	}
 
