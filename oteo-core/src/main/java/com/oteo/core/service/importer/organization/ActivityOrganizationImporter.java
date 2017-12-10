@@ -41,18 +41,15 @@ public class ActivityOrganizationImporter implements Importer<ActivityOrganizati
 				continue;
 			}
 
-			if (StringUtils.isBlank(activityOrganizationCsvFile.getId_organizacion())) {
-				summary.append("Línea " + line + ": id_organizacion no puede ser vacio ni nulo, ");
-				continue;
-			}
+			if (StringUtils.isNotBlank(activityOrganizationCsvFile.getId_organizacion())) {
+				Organization organization = organizationMapper
+						.getOrganizationById(activityOrganizationCsvFile.getId_organizacion());
 
-			Organization organization = organizationMapper
-					.getOrganizationById(activityOrganizationCsvFile.getId_organizacion());
-
-			if (null == organization) {
-				summary.append("Línea " + line + ": La organización con id_organizacion: "
-						+ activityOrganizationCsvFile.getId_organizacion() + " no existe, ");
-				continue;
+				if (null == organization) {
+					summary.append("Línea " + line + ": La organización con id_organizacion: "
+							+ activityOrganizationCsvFile.getId_organizacion() + " no existe, ");
+					continue;
+				}
 			}
 
 			ActivityOrganization activityOrganization = transformActivityOrganization(activityOrganizationCsvFile);
@@ -73,7 +70,8 @@ public class ActivityOrganizationImporter implements Importer<ActivityOrganizati
 
 		return ActivityOrganization.builder()
 				.activityOrganizationId(activityOrganizationCsvFile.getId_actividad())
-				.organizationId(activityOrganizationCsvFile.getId_organizacion())
+				.organizationId(StringUtils.isNotBlank(activityOrganizationCsvFile.getId_organizacion()) ?
+					activityOrganizationCsvFile.getId_organizacion() : null)
 				.strengthType(activityOrganizationCsvFile.getTipo_resistencia())
 				.strengthDescription(activityOrganizationCsvFile.getDescrip_resistencias())
 				.results(activityOrganizationCsvFile.getMateriales_produc())

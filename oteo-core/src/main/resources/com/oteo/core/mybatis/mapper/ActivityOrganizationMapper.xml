@@ -49,8 +49,9 @@
 			created_by, created_datetime, modified_by, modified_datetime)
 		VALUES (#{activityOrganizationId}, #{organizationId}, #{strengthType}, #{strengthDescription}, #{results}, #{resultName}, #{datetime}, #{link},
 			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
-		ON CONFLICT (activity_organization_id, organization_id) DO UPDATE
+		ON CONFLICT (activity_organization_id) DO UPDATE
 		SET
+		organization_id = #{organizationId},
 		strength_type = #{strengthType},
 		strength_description = #{strengthDescription},
 		results = #{results},
