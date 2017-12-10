@@ -5,7 +5,8 @@
 <mapper namespace="com.oteo.core.mybatis.mapper.DefenderCaseTrackingMapper">
 
 	<sql id="defenderCaseTrackingColumns">
-		${alias}.defender_case_tracking_id AS ${alias}_defender_case_tracking_id,
+		${alias}.tracking_id AS ${alias}_tracking_id,
+		${alias}.case_id AS ${alias}_case_id,
 		${alias}.defender_id AS ${alias}_defender_id,
 		${alias}.name AS ${alias}_name,
 		${alias}.progress AS ${alias}_progress,
@@ -15,7 +16,8 @@
 	</sql>
 
 	<resultMap id="defenderCaseTrackingResultMap" type="com.oteo.core.mybatis.domain.DefenderCaseTracking">
-		<id property="defenderCaseTrackingId" column="defender_case_tracking_defender_case_tracking_id" />
+		<id property="trackingId" column="defender_case_tracking_tracking_id" />
+		<result property="caseId" column="defender_case_tracking_case_id" />
 		<result property="defenderId" column="defender_case_tracking_defender_id"/>
 		<result property="name" column="defender_case_tracking_name"/>
 		<result property="progress" column="defender_case_tracking_progress"/>
@@ -34,12 +36,14 @@
 	</select>
 
 	<insert id="addOrUpdateDefenderCaseTracking">
-		INSERT INTO defender_case_tracking (defender_case_tracking_id, defender_id, name, progress, datetime, observation, link,
-			created_by, created_datetime, modified_by, modified_datetime)
-		VALUES (#{defenderCaseTrackingId}, #{defenderId}, #{name}, #{progress}, #{datetime}, #{observation}, #{link},
-			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
-		ON CONFLICT (defender_case_tracking_id, defender_id) DO UPDATE
+		INSERT INTO defender_case_tracking (tracking_id, case_id, defender_id, name, progress, datetime, observation,
+			link, created_by, created_datetime, modified_by, modified_datetime)
+		VALUES (#{trackingId}, #{caseId}, #{defenderId}, #{name}, #{progress}, #{datetime}, #{observation},
+			#{link}, #{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
+		ON CONFLICT (tracking_id) DO UPDATE
 		SET
+		case_id = #{caseId},
+		defender_id = #{defenderId},
 		name = #{name},
 		progress = #{progress},
 		datetime = #{datetime},

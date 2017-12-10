@@ -36,6 +36,11 @@ public class DefenderCaseTrackingImporter implements Importer<DefenderCaseTracki
 			long line = entry.getKey();
 			DefenderCaseTrackingCsvFile defenderCaseTrackingCsvFile = entry.getValue();
 
+			if (StringUtils.isBlank(defenderCaseTrackingCsvFile.getId_seguimiento())) {
+				summary.append("Línea " + line + ": id_seguimiento no puede ser vacio ni nulo, ");
+				continue;
+			}
+
 			if (StringUtils.isBlank(defenderCaseTrackingCsvFile.getId_caso())) {
 				summary.append("Línea " + line + ": id_caso no puede ser vacio ni nulo, ");
 				continue;
@@ -72,7 +77,8 @@ public class DefenderCaseTrackingImporter implements Importer<DefenderCaseTracki
 			final DefenderCaseTrackingCsvFile defenderCaseTrackingCsvFile) {
 
 		return DefenderCaseTracking.builder()
-				.defenderCaseTrackingId(defenderCaseTrackingCsvFile.getId_caso())
+				.trackingId(defenderCaseTrackingCsvFile.getId_seguimiento())
+				.caseId(defenderCaseTrackingCsvFile.getId_caso())
 				.defenderId(defenderCaseTrackingCsvFile.getId_defensorx())
 				.name(defenderCaseTrackingCsvFile.getNombre_caso())
 				.progress(defenderCaseTrackingCsvFile.getAvance_caso())

@@ -13,13 +13,14 @@ public class DefenderCaseTrackingTableMapper implements TableMapper<DefenderCase
 		List<String> dataAsList = cleanRow(line);
 
 		return DefenderCaseTrackingCsvFile.builder()
-				.id_caso(dataAsList.get(0))
-				.id_defensorx(dataAsList.get(1))
-				.nombre_caso(dataAsList.get(2))
-				.avance_caso(dataAsList.get(3))
-				.fecha(dataAsList.get(4))
-				.observacion(dataAsList.get(5))
-				.link(dataAsList.get(6))
+				.id_seguimiento(dataAsList.get(0))
+				.id_caso(dataAsList.get(1))
+				.id_defensorx(dataAsList.get(2))
+				.nombre_caso(dataAsList.get(3))
+				.avance_caso(dataAsList.get(4))
+				.fecha(dataAsList.get(5))
+				.observacion(dataAsList.get(6))
+				.link(dataAsList.get(7))
 				.build();
 	}
 

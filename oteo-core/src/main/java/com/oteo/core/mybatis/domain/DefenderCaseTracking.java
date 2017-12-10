@@ -10,7 +10,9 @@ import lombok.Data;
 @Builder
 public class DefenderCaseTracking {
 
-	private String defenderCaseTrackingId;
+	private String trackingId;
+
+	private String caseId;
 
 	private String defenderId;
 

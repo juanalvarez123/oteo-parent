@@ -7,6 +7,8 @@ import lombok.Data;
 @Builder
 public class DefenderCaseTrackingCsvFile {
 
+	private String id_seguimiento;
+
 	private String id_caso;
 
 	private String id_defensorx;
