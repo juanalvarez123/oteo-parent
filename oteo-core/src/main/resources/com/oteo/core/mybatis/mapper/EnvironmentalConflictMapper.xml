@@ -53,10 +53,12 @@
 	</select>
 
 	<insert id="addOrUpdateEnvironmentalConflict">
-		INSERT INTO environmental_conflict (environmental_conflict_id, country, place, name, latitude, longitude, datetime, conflict, extractivism, resources, source, link,
-			created_by, created_datetime, modified_by, modified_datetime)
-		VALUES (#{environmentalConflictId}, #{country}, #{place}, #{name}, #{latitude}, #{longitude}, #{datetime}, #{conflict}, #{extractivism}, #{resources}, #{source}, #{link},
-			#{createdBy}, #{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
+		INSERT INTO environmental_conflict (environmental_conflict_id, country, place, name, latitude,
+			longitude, datetime, conflict, extractivism, resources, source, link, created_by,
+			created_datetime, modified_by, modified_datetime)
+		VALUES (#{environmentalConflictId}, #{country}, #{place}, #{name}, #{latitude},
+			#{longitude}, #{datetime}, #{conflict}, #{extractivism}, #{resources}, #{source}, #{link}, #{createdBy},
+			#{createdDatetime}, #{modifiedBy}, #{modifiedDatetime})
 		ON CONFLICT (environmental_conflict_id) DO UPDATE
 		SET
 		country = #{country},
